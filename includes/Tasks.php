@@ -8,9 +8,6 @@ namespace app\includes;
  * @package app\includes
  *
  */
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
 use app\config\Connection;
 
 class Tasks
@@ -26,7 +23,6 @@ class Tasks
 
 	public function addTask($post){
 		$pdo = new Connection;
-		$mail = new PHPMailer();
 		if (!empty($post)) {
 			extract($post);
 

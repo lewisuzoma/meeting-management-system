@@ -16,12 +16,9 @@ defined('SITE_TITLE') ? null : define('SITE_TITLE', 'MMS');
 
 //Load composer autoload
 require_once(SITE_ROOT.DS."MMS/vendor/autoload.php");
-
-//require_once(CLASS_PATH.DS."member.php");
-
-
-//Load Core objects
-//require_once(LIB_PATH.DS."database.php");
+//Load Dotenv dependency
+$dotenv = Dotenv\Dotenv::createImmutable(SITE_ROOT);
+$dotenv->load();
 
 
 ?>

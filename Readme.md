@@ -5,11 +5,12 @@ Classes are loaded using autoloader. PHPMailer is used for the mail function.
 # Setup:
  
 1. Install composer https://getcomposer.org
-2. Run ```$ composer install``` on the `/MMS` parent directory to install all composer dependecies and autoloader.
+2. Run ```$ composer install```  to install all composer dependecies and autoloader.
 3. Create a new database in MySQL.
 4. Run the SQL query in "meeting_db.sql".
 5. Open the file "config/Connection.php" and change the Server name, Username, Password and Database name.
-6. Visit the home page in browser. Use the "Admin Login" link to login to Admin Panel. Default user - 'hassan.abdulrahman3333@gmail.com' pass - '1234567890'.
+6. Mail credentails are to be configured in `.env` file. `SMTP_HOST` `SMTP_PORT` `SENT_EMAIL` and `EMAIL_PASSWORD` are required global $env variables that must be provided for your mail to function properly. others are optional.  
+7. Visit the home page in browser. Use the "Admin Login" link to login to Admin Panel. Default user - 'hassan.abdulrahman3333@gmail.com' pass - '1234567890'.
 
 Use the "Login" link to login as staff or student. 
 

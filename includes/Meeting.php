@@ -49,9 +49,9 @@ class Meeting
 			$mail->SMTPDebug = 0; //SMTP::DEBUG_SERVER;                               // Enable verbose debug output
 
 			/* Recipients */
-			$mail->setFrom('contact@projectguru.com.ng', 'MMS');
+			$mail->setFrom($_ENV['SENT_EMAIL'], $_ENV['SENT_NAME']);
 			$mail->addAddress($email);     // Add a recipient
-			$mail->addReplyTo('contact@projectguru.com.ng','no-reply');
+			$mail->addReplyTo($_ENV['REPLY_TO_EMAIL'],'no-reply');
 		
 			/* Content */
 			$mail->Subject = "Meeting Request";
@@ -60,13 +60,13 @@ class Meeting
 
 			/* SMTP parameters. */
 			$mail->isSMTP();                                      // Set mailer to use SMTP
-			$mail->Host = 'mail.projectguru.com.ng';					// Specify main and backup SMTP servers
+			$mail->Host = $_ENV['SMTP_HOST'];					// Specify main and backup SMTP servers
 			$mail->SMTPAuth = true;                               // Enable SMTP authentication
 			//$mail->SMTPAutoTLS = false;
 			$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;    // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS ENCRYPTION_STARTTLS` also accepted
-			$mail->Username = 'contact@projectguru.com.ng';                 // SMTP username
-			$mail->Password = '(x358nIGk8.iEY';                           // SMTP password
-			$mail->Port = 465;  // or 587                                  // TCP port to connect to
+			$mail->Username = $_ENV['SENT_EMAIL'];                 // SMTP username
+			$mail->Password = $_ENV['EMAIL_PASSWORD'];                           // SMTP password
+			$mail->Port = $_ENV['SMTP_PORT'];  // or 587                                  // TCP port to connect to
 
 			/* Disable some SSL checks. */
 			$mail->SMTPOptions = array(
@@ -98,9 +98,9 @@ class Meeting
 		$mail->SMTPDebug = 0; //SMTP::DEBUG_SERVER;                               // Enable verbose debug output
 
 		/* Recipients */
-		$mail->setFrom('contact@projectguru.com.ng', 'MMS');
+		$mail->setFrom($_ENV['SENT_EMAIL'], $_ENV['SENT_NAME']);
 		$mail->addAddress($email);     // Add a recipient
-		$mail->addReplyTo('contact@projectguru.com.ng','no-reply');
+		$mail->addReplyTo($_ENV['REPLY_TO_EMAIL'],'no-reply');
 	
 		/* Content */
 		$mail->Subject = 'Meeting Request Accepted';
@@ -109,13 +109,13 @@ class Meeting
 
 		/* SMTP parameters. */
 		$mail->isSMTP();                                      // Set mailer to use SMTP
-		$mail->Host = 'mail.projectguru.com.ng';					// Specify main and backup SMTP servers
+		$mail->Host = $_ENV['SMTP_HOST'];					// Specify main and backup SMTP servers
 		$mail->SMTPAuth = true;                               // Enable SMTP authentication
 		//$mail->SMTPAutoTLS = false;
 		$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;    // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS ENCRYPTION_STARTTLS` also accepted
-		$mail->Username = 'contact@projectguru.com.ng';                 // SMTP username
-		$mail->Password = '(x358nIGk8.iEY';                           // SMTP password
-		$mail->Port = 465;  // or 587                                  // TCP port to connect to
+		$mail->Username = $_ENV['SENT_EMAIL'];                 // SMTP username
+		$mail->Password = $_ENV['EMAIL_PASSWORD'];                           // SMTP password
+		$mail->Port = $_ENV['SMTP_PORT'];  // or 587                                  // TCP port to connect to
 
 		/* Disable some SSL checks. */
 		$mail->SMTPOptions = array(
@@ -146,9 +146,9 @@ class Meeting
 		$mail->SMTPDebug = 0; //SMTP::DEBUG_SERVER;                               // Enable verbose debug output
 
 		/* Recipients */
-		$mail->setFrom('contact@projectguru.com.ng', 'MMS');
+		$mail->setFrom($_ENV['SENT_EMAIL'], $_ENV['SENT_NAME']);
 		$mail->addAddress($email);     // Add a recipient
-		$mail->addReplyTo('contact@projectguru.com.ng','no-reply');
+		$mail->addReplyTo($_ENV['REPLY_TO_EMAIL'],'no-reply');
 	
 		/* Content */
 		$mail->Subject = 'Meeting Request Declined';
@@ -157,13 +157,13 @@ class Meeting
 
 		/* SMTP parameters. */
 		$mail->isSMTP();                                      // Set mailer to use SMTP
-		$mail->Host = 'mail.projectguru.com.ng';					// Specify main and backup SMTP servers
+		$mail->Host = $_ENV['SMTP_HOST'];					// Specify main and backup SMTP servers
 		$mail->SMTPAuth = true;                               // Enable SMTP authentication
 		//$mail->SMTPAutoTLS = false;
 		$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;    // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS ENCRYPTION_STARTTLS` also accepted
-		$mail->Username = 'contact@projectguru.com.ng';                 // SMTP username
-		$mail->Password = '(x358nIGk8.iEY';                           // SMTP password
-		$mail->Port = 465;  // or 587                                  // TCP port to connect to
+		$mail->Username = $_ENV['SENT_EMAIL'];                 // SMTP username
+		$mail->Password = $_ENV['EMAIL_PASSWORD'];                           // SMTP password
+		$mail->Port = $_ENV['SMTP_PORT'];  // or 587                                  // TCP port to connect to
 
 		/* Disable some SSL checks. */
 		$mail->SMTPOptions = array(
@@ -214,9 +214,9 @@ class Meeting
 				$mail->SMTPDebug = 0; //SMTP::DEBUG_SERVER;                               // Enable verbose debug output
 
 				/* Recipients */
-				$mail->setFrom('contact@projectguru.com.ng', 'MMS');
+				$mail->setFrom($_ENV['SENT_EMAIL'], $_ENV['SENT_NAME']);
 				$mail->addAddress($result->email, $result->name);     // Add a recipient
-				$mail->addReplyTo('contact@projectguru.com.ng','no-reply');
+				$mail->addReplyTo($_ENV['REPLY_TO_EMAIL'],'no-reply');
 			
 				/* Content */
 				$mail->Subject = $res->name.' '.$subjectOfMeeting;
@@ -225,13 +225,13 @@ class Meeting
 
 				/* SMTP parameters. */
 				$mail->isSMTP();                                      // Set mailer to use SMTP
-				$mail->Host = 'mail.projectguru.com.ng';					// Specify main and backup SMTP servers
+				$mail->Host = $_ENV['SMTP_HOST'];					// Specify main and backup SMTP servers
 				$mail->SMTPAuth = true;                               // Enable SMTP authentication
 				//$mail->SMTPAutoTLS = false;
 				$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;    // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS ENCRYPTION_STARTTLS` also accepted
-				$mail->Username = 'contact@projectguru.com.ng';                 // SMTP username
-				$mail->Password = '(x358nIGk8.iEY';                           // SMTP password
-				$mail->Port = 465;  // or 587                                  // TCP port to connect to
+				$mail->Username = $_ENV['SENT_EMAIL'];                 // SMTP username
+				$mail->Password = $_ENV['EMAIL_PASSWORD'];                           // SMTP password
+				$mail->Port = $_ENV['SMTP_PORT'];  // or 587                                  // TCP port to connect to
 
 				/* Disable some SSL checks. */
 				$mail->SMTPOptions = array(
@@ -280,9 +280,9 @@ class Meeting
 				$mail->SMTPDebug = SMTP::DEBUG_SERVER;                               // Enable verbose debug output
 
 				/* Recipients */
-				$mail->setFrom('contact@projectguru.com.ng', 'MMS');
+				$mail->setFrom($_ENV['SENT_EMAIL'], $_ENV['SENT_NAME']);
 				$mail->addAddress($result->email, $result->name);     // Add a recipient
-				$mail->addReplyTo('contact@projectguru.com.ng','no-reply');
+				$mail->addReplyTo($_ENV['REPLY_TO_EMAIL'],'no-reply');
 			
 				/* Content */
 				$mail->Subject = $res->name.' '.$subjectOfMeeting;
@@ -291,13 +291,13 @@ class Meeting
 
 				/* SMTP parameters. */
 				$mail->isSMTP();                                      // Set mailer to use SMTP
-				$mail->Host = 'mail.projectguru.com.ng';					// Specify main and backup SMTP servers
+				$mail->Host = $_ENV['SMTP_HOST'];					// Specify main and backup SMTP servers
 				$mail->SMTPAuth = true;                               // Enable SMTP authentication
 				//$mail->SMTPAutoTLS = false;
 				$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;    // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS ENCRYPTION_STARTTLS` also accepted
-				$mail->Username = 'contact@projectguru.com.ng';                 // SMTP username
-				$mail->Password = '(x358nIGk8.iEY';                           // SMTP password
-				$mail->Port = 465;  // or 587                                  // TCP port to connect to
+				$mail->Username = $_ENV['SENT_EMAIL'];                 // SMTP username
+				$mail->Password = $_ENV['EMAIL_PASSWORD'];                           // SMTP password
+				$mail->Port = $_ENV['SMTP_PORT'];  // or 587                                  // TCP port to connect to
 
 				/* Disable some SSL checks. */
 				$mail->SMTPOptions = array(
