@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2021 at 12:19 PM
+-- Generation Time: Jun 02, 2021 at 10:37 PM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -33,6 +33,7 @@ CREATE TABLE `listtask` (
   `title` varchar(255) NOT NULL,
   `details` varchar(255) NOT NULL,
   `deadline` date NOT NULL,
+  `startTime` date DEFAULT NULL,
   `createdOn` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -41,10 +42,10 @@ CREATE TABLE `listtask` (
 -- Dumping data for table `listtask`
 --
 
-INSERT INTO `listtask` (`taskid`, `userId`, `createdBy`, `title`, `details`, `deadline`, `createdOn`, `status`) VALUES
-(1, 5, 6, 'Forensic', 'Go to site.\r\nTake some samples', '2021-06-05', '2021-05-31 09:29:21', 'completed'),
-(2, 0, 6, 'Forensic', 'Go to site.\r\nTake some samples', '2021-06-05', '2021-05-31 09:42:01', 'active'),
-(3, 5, 0, 'Forensic', 'Go to site.\r\nCollect some samples.', '2021-06-05', '2021-05-31 09:45:31', 'active');
+INSERT INTO `listtask` (`taskid`, `userId`, `createdBy`, `title`, `details`, `deadline`, `startTime`, `createdOn`, `status`) VALUES
+(1, 5, 6, 'Forensic', 'Go to site.\r\nTake some samples', '2021-06-05', '2021-06-01', '2021-05-31 09:29:21', 'completed'),
+(2, 0, 6, 'Forensic', 'Go to site.\r\nTake some samples', '2021-06-05', '2021-06-02', '2021-05-31 09:42:01', 'active'),
+(3, 5, 0, 'Forensic', 'Go to site.\r\nCollect some samples.', '2021-06-05', '2021-06-03', '2021-05-31 09:45:31', 'active');
 
 -- --------------------------------------------------------
 
