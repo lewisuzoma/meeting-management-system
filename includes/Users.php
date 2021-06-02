@@ -114,6 +114,10 @@ class Users
 		return $this->pdo->loadResultList("SELECT * FROM `users` WHERE `memberType`='4'");
 	}
 
+	public function fetchUsers() {
+		return $this->pdo->loadResultList("SELECT * FROM `users`");
+	}
+
 	public function fetchStaffUsers() {
 		return $this->pdo->loadResultList("SELECT * FROM `users` WHERE `memberType`='2'");
 	}

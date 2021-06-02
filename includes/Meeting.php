@@ -141,7 +141,7 @@ class Meeting
 		$this->pdo->preparedStatement("UPDATE meetingrequest SET status=? WHERE id=?", ['declined', $id]);
 		$mail = new PHPMailer();
 		//The link that we will send the user via email.
-		$emailBody = "<div> Hello Sorry, Your meeting (".$purpose.") request has been declined.<br /><br /><b>Regards.</b></div>";
+		$emailBody = "<div> Hello Sorry, Your meeting (".$purpose.") request has been declined. <b>Please reschedule your meeting.</b><br /><br /><b>Regards.</b></div>";
 		
 		$mail->SMTPDebug = 0; //SMTP::DEBUG_SERVER;                               // Enable verbose debug output
 
@@ -190,8 +190,9 @@ class Meeting
 		$mail = new PHPMailer();
 		if (!empty($post)) {
 			extract($post);
-			/*$keys = array_keys($post);
-			$values = array_values($post);*/
+			
+			$stmt = $this->pdo->preparedStatement("SELECT COUNT(*) FROM `meetings` WHERE `meetingDate`='$date'");
+			if($stmt->fetchColumn() < 1){
 
 			$this->pdo->preparedStatement("INSERT INTO `meetings` (`subject`, `agenda`, `meetingTypeId`, `attendee`, `greetingText`, `venue`, `meetingDate`, `meetingTime`, `isActive`, `createdBy`) VALUES ('$subjectOfMeeting','$agenda','$typeOfMeeting','$attendess','$greetingtxt','$venue','$date','$time','1','{$_SESSION['userType']}') ");
 
@@ -251,10 +252,13 @@ class Meeting
 				    
 				}
 			}
+
 			return true;
-			
 		}else {
+
 			return false;
+		}
+			
 		}	
 	}
 

@@ -2,11 +2,13 @@
 use app\config\Connection;
 use app\config\Functions;
 use app\includes\Tasks;
+use app\includes\Users;
 use app\config\Session;
 
 $session = new Session;
 $functions = new Functions;
 $pdo = new Connection;
+$user = new Users($pdo);
 $task = new Tasks($pdo);
 
 if(empty($_SESSION["user_token"])) {
@@ -274,21 +276,38 @@ if(empty($_SESSION["user_token"])) {
                                 </div>
                               </div>
                             </div>
-                              <!-- card1 start -->
-                              <!-- Statestics Start -->                                 
-                                 <div class="col-md-12 col-xl-4 ">
-                                 <div class="card fb-card">
-                                 <div class="card-header">
-                                 <div class="d-inline-block">
-                                 <h5>Reminders</h5>
-                                 </div>
-                                 </div>
-                                 <div class="card-block text-center">
-                                 <div class="row">
-                                 </div>
-                                 </div>
-                                 </div>
-                                 </div>
+                              <div class="col-md-12 col-xl-8">
+                              <?php echo $session->check_message(); ?>
+                                <div class="card">
+                                  <div class="card-header"><h4>Add New Task</h4></div>
+                                  <div class="card-body">
+                                    <form method="post" action="controller.php">
+                                      <input type="hidden" name="action" value="studaddtask">
+                                      <input type="hidden" name="user" value="<?php echo $_SESSION['userId']; ?>">
+                                    <div class="mt-3">
+                                      <label for="title" class="form-label">Task Name</label>
+                                      <input class="form-control" type="text"name="title" id="title">
+                                    </div>
+                                    <div class="mt-3">
+                                      <label for="details" class="form-label">Details</label>
+                                      <textarea rows="6" cols="5" class="form-control" name="details" id="details"></textarea>
+                                    </div>
+                                    <div class="mt-3">
+                                      <label for="starttime" class="form-label">Start Time</label>
+                                      <input class="form-control" type="date" name="starttime" id="starttime" >
+                                    </div>
+                                    <div class="mt-3">
+                                      <label for="deadline" class="form-label">Deadline</label>
+                                      <input class="form-control" type="date" name="deadline" id="deadline" >
+                                    </div>
+                                    <div class="mt-3">
+                                      <label for="status" class="form-label">Status</label>
+                                      <input class="form-control" type="text" name="status" id="status" value="active" readonly="true">
+                                    </div>
+                                    <br>
+                                    <button type="submit" name="save_task" class="btn btn-primary">Save</button>
+                                    </form>
+                                  </div>
                            </div>
                            <div id="styleSelector">
                            </div>
@@ -299,7 +318,7 @@ if(empty($_SESSION["user_token"])) {
             </div>
          </div>
       </div>
-      -->
+      
       <!-- Required Jquery -->
       <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
       <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js"></script>

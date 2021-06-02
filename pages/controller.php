@@ -21,8 +21,11 @@ if(empty($_SESSION["user_token"])) {
 	switch ($action) {
 		case 'addmeeting':
 			$response = $meeting->addMeeting($_POST);
-			if ($response):
+			if ($response === true):
 				$session->message("New meeting successfully added", "success");
+				$functions->redirect_to("admin_meetings.php");
+			else:
+				$session->message("Your entry is already in the tale/list. please choose another schedule.", "error");
 				$functions->redirect_to("admin_meetings.php");
 			endif;
 		break;
@@ -37,9 +40,23 @@ if(empty($_SESSION["user_token"])) {
 
 		case 'addtask':
 			$response = $task->addTask($_POST);
-			if ($response):
+			if ($response === true):
 				$session->message("New task set", "success");
 				$functions->redirect_to("staff_task.php");
+			else:
+				$session->message("Your entry is already in the tale/list. please choose another schedule.", "error");
+				$functions->redirect_to("staff_task.php");
+			endif;
+		break;
+
+		case 'studaddtask':
+			$response = $task->addTask($_POST);
+			if ($response === true):
+				$session->message("New task set", "success");
+				$functions->redirect_to("stud_task.php");
+			else:
+				$session->message("Your entry is already in the tale/list. please choose another schedule.", "error");
+				$functions->redirect_to("stud_task.php");
 			endif;
 		break;
 		

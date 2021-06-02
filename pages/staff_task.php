@@ -306,6 +306,10 @@ if(empty($_SESSION["user_token"])) {
                                       <textarea rows="6" cols="5" class="form-control" name="details" id="details"></textarea>
                                     </div>
                                     <div class="mt-3">
+                                      <label for="starttime" class="form-label">Start Time</label>
+                                      <input class="form-control" type="date" name="starttime" id="starttime" >
+                                    </div>
+                                    <div class="mt-3">
                                       <label for="deadline" class="form-label">Deadline</label>
                                       <input class="form-control" type="date" name="deadline" id="deadline" >
                                     </div>

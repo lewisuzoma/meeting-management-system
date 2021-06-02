@@ -312,7 +312,7 @@ if(empty($_SESSION["user_token"])) {
                       <label for="title" class="form-label">User</label>
                       <select class="form-control" name="user">
                         <option>--please select user--</option>
-                        <?php $results = $user->fetchStudentUsers();
+                        <?php $results = $user->fetchUsers();
                          foreach ($results as $result) {
                            ?>
                            <option value="<?php echo $result->id; ?>"><?php echo $result->name; ?></option>
@@ -329,6 +329,10 @@ if(empty($_SESSION["user_token"])) {
                     <div class="mt-3">
                       <label for="details" class="form-label">Details</label>
                       <textarea rows="6" cols="5" class="form-control" name="details" id="details"></textarea>
+                    </div>
+                    <div class="mt-3">
+                      <label for="starttime" class="form-label">Start Time</label>
+                      <input class="form-control" type="date" name="starttime" id="starttime" >
                     </div>
                     <div class="mt-3">
                       <label for="deadline" class="form-label">Deadline</label>

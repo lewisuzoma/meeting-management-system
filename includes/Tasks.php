@@ -26,15 +26,17 @@ class Tasks
 		if (!empty($post)) {
 			extract($post);
 
-		$qry = $this->pdo->preparedStatement("INSERT INTO `listtask`(`userId`, `createdBy`, `title`, `details`, `deadline`, `status`) VALUES ('$user','{$_SESSION["userId"]}','$title','$details','$deadline','active') ");
+		$stmt = $this->pdo->preparedStatement("SELECT COUNT(*) FROM `listtask` WHERE `deadline`='$deadline' OR `startTime`='$starttime'");
+			if($stmt->fetchColumn() < 1){
+
+		$qry = $this->pdo->preparedStatement("INSERT INTO `listtask`(`userId`, `createdBy`, `title`, `details`, `startTime`, `deadline`, `status`) VALUES ('$user','{$_SESSION["userId"]}','$title','$details',$starttime,'$deadline','active') ");
 	
-			if(!$qry) {
-				return false;
-			    
-			} else {
-				return true;
-			    
-			}
+			if($qry) {return true;} 
+
+		}else{
+			return false;
+		}
+
 		}
 	}
 

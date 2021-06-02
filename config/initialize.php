@@ -17,8 +17,7 @@ defined('SITE_TITLE') ? null : define('SITE_TITLE', 'MMS');
 //Load composer autoload
 require_once(SITE_ROOT.DS."MMS/vendor/autoload.php");
 //Load Dotenv dependency
-$dotenv = Dotenv\Dotenv::createImmutable(SITE_ROOT);
+$dotenv = Dotenv\Dotenv::createImmutable(SITE_ROOT.DS."MMS");
 $dotenv->load();
-
 
 ?>

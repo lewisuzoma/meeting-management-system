@@ -47,6 +47,11 @@ if(empty($_SESSION["user_token"])) {
 <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 <link rel="stylesheet" type="text/css" href="../css/style.css">
+<!-- Required Jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="assets/css/calendar.css">
 </head>
 
 <body>
@@ -228,87 +233,37 @@ if(empty($_SESSION["user_token"])) {
 <!-- Statestics Start -->
 <div class="col-md-12 ">
 <div class="card">
-<div class="card-body" style="overflow-x:auto;">
-<form method="post" action="schedules.php">
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Day</th>
-      <th scope="col">8:00-9:00</th>
-      <th scope="col">9:00-10:00</th>
-      <th scope="col">10:00-11:00</th>
-      <th scope="col">11:00-12:00</th>
-      <th scope="col">12:00-13:00</th>
-      <th scope="col">13:00-14:00</th>
-      <th scope="col">14:00-15:00</th>
-      <th scope="col">15:00-16:00</th>
-      <th scope="col">16:00-17:00</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">Monday</th>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th scope="row">Tuesday</th>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th scope="row">Wednesday</th>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th scope="row">Thursday</th>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th scope="row">Friday</th>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
-</form>
+<div class="card-body">
+
+<div class="container"> 
+  <div class="page-header">
+    <div class="pull-right form-inline">
+      <div class="btn-group">
+        <button class="btn btn-primary" data-calendar-nav="prev"><< Prev</button>
+        <button class="btn btn-default" data-calendar-nav="today">Today</button>
+        <button class="btn btn-primary" data-calendar-nav="next">Next >></button>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-warning" data-calendar-view="year">Year</button>
+        <button class="btn btn-warning active" data-calendar-view="month">Month</button>
+        <button class="btn btn-warning" data-calendar-view="week">Week</button>
+        <button class="btn btn-warning" data-calendar-view="day">Day</button>
+      </div>
+    </div>
+    <h3></h3>
+    <!-- <small>To see example with events navigate to Februray 2018</small> -->
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div id="showEventCalendar"></div>
+    </div>
+    <div class="col-md-3">
+      <h4>All Events List</h4>
+      <ul id="eventlist" class="nav nav-list"></ul>
+    </div>
+  </div>  
+</div>
+
 </div>
 </div>
 </div>
@@ -317,11 +272,10 @@ if(empty($_SESSION["user_token"])) {
 </div>
 </div>
 </div>
-<!-- Required Jquery -->
-<script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js"></script>
-<script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
-<script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js"></script>
+<!-- Scheduling calendar -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script type="text/javascript" src="assets/js/calendar.js"></script>
+<script type="text/javascript" src="assets/js/events.js"></script>
 <!-- jquery slimscroll js -->
 <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js"></script>
 <!-- modernizr js -->
