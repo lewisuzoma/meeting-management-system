@@ -1,4 +1,4 @@
-<?php require_once("../config/initialize.php"); ?>
+<?php require_once("../../config/initialize.php"); ?>
 <?php
 //Import custom Mailer classe into the global namespace
 use app\config\Connection;
@@ -11,7 +11,7 @@ $functions = new Functions;
 $pdo = new Connection;
 
 if(empty($_SESSION["user_token"])) {
-  $functions->redirect_to("admin.php");
+  $functions->redirect_to("../secretary.php");
 } else {
 
   if(isset($_REQUEST['token'])){
@@ -20,7 +20,7 @@ if(empty($_SESSION["user_token"])) {
     $loggedout = $session->logout($token, $queryStrToken);
 
     if ($loggedout) {
-      $functions->redirect_to("admin.php");
+      $functions->redirect_to("../secretary.php");
     }
   }
 
@@ -39,19 +39,19 @@ if(empty($_SESSION["user_token"])) {
 <!-- Google font-->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
 <!-- Required Fremwork -->
-<link rel="stylesheet" type="text/css" href="assets/css/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/bootstrap/css/bootstrap.min.css">
 <!-- themify-icons line icon -->
-<link rel="stylesheet" type="text/css" href="assets/icon/themify-icons/themify-icons.css">
+<link rel="stylesheet" type="text/css" href="../assets/icon/themify-icons/themify-icons.css">
 <!-- ico font -->
-<link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
+<link rel="stylesheet" type="text/css" href="../assets/icon/icofont/css/icofont.css">
 <!-- Style.css -->
-<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-<link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/jquery.mCustomScrollbar.css">
 <!-- Required Jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="assets/css/calendar.css">
+<link rel="stylesheet" href="../assets/css/calendar.css">
 </head>
 
 <body>
@@ -94,7 +94,7 @@ if(empty($_SESSION["user_token"])) {
                         </li>
                         <li>
                            <div class="media">
-                              <img class="d-flex align-self-center img-radius" src="../images/avatar.jpg" alt="Generic placeholder image">
+                              <img class="d-flex align-self-center img-radius" src="../../images/avatar.jpg" alt="Generic placeholder image">
                               <div class="media-body">
                                  <h5 class="notification-user"></h5>
                                  <p class="notification-msg"></p>
@@ -104,7 +104,7 @@ if(empty($_SESSION["user_token"])) {
                         </li>
                         <li>
                            <div class="media">
-                              <img class="d-flex align-self-center img-radius" src="../images/avatar.jpg" alt="Generic placeholder image">
+                              <img class="d-flex align-self-center img-radius" src="../../images/avatar.jpg" alt="Generic placeholder image">
                               <div class="media-body">
                                  <h5 class="notification-user">Joseph William</h5>
                                  <p class="notification-msg"></p>
@@ -114,7 +114,7 @@ if(empty($_SESSION["user_token"])) {
                         </li>
                         <li>
                            <div class="media">
-                              <img class="d-flex align-self-center img-radius" src="assets/images/avatar-4.jpg" alt="Generic placeholder image">
+                              <img class="d-flex align-self-center img-radius" src="../assets/images/avatar-4.jpg" alt="Generic placeholder image">
                               <div class="media-body">
                                  <h5 class="notification-user">Sara Soudein</h5>
                                  <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
@@ -126,18 +126,18 @@ if(empty($_SESSION["user_token"])) {
                   </li>
                   <li class="user-profile header-notification">
                      <a href="#!">
-                     <img src="../images/avatar.jpg" class="img-radius" alt="User-Profile-Image">
+                     <img src="../../images/avatar.jpg" class="img-radius" alt="User-Profile-Image">
                      <span></span>
                      <i class="ti-angle-down"></i>
                      </a>
                      <ul class="show-notification profile-notification">
                         <li>
-                           <a href="admin_setting.php">
+                           <a href="setting.php">
                            <i class="ti-settings"></i> Settings
                            </a>
                         </li>
                         <li>
-                           <a href="admin_profile.php">
+                           <a href="profile.php">
                            <i class="ti-user"></i> Profile
                            </a>
                         </li>
@@ -154,7 +154,7 @@ if(empty($_SESSION["user_token"])) {
       </nav>
       <div class="pcoded-main-container">
          <div class="pcoded-wrapper">
-            <?php include "admin_nav.php"; ?>
+            <?php include "sec_nav.php"; ?>
 <div class="pcoded-content">
 <div class="pcoded-inner-content">
 <div class="main-body">
@@ -192,8 +192,8 @@ if(empty($_SESSION["user_token"])) {
       <div id="showEventCalendar"></div>
     </div>
     <div class="col-md-3">
-      <h4>All Events List</h4>
-      <ul id="eventlist" class="nav nav-list"></ul>
+      <!-- <h4>All Events List</h4> -->
+      <ul id="eventlist" class="nav nav-list" style="display: none;"></ul>
     </div>
   </div>  
 </div>
@@ -209,24 +209,24 @@ if(empty($_SESSION["user_token"])) {
 </div>
 <!-- Scheduling calendar -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-<script type="text/javascript" src="assets/js/calendar.js"></script>
-<script type="text/javascript" src="assets/js/events.js"></script>
+<script type="text/javascript" src="../assets/js/calendar.js"></script>
+<script type="text/javascript" src="../assets/js/events.js"></script>
 <!-- jquery slimscroll js -->
-<script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js"></script>
+<script type="text/javascript" src="../assets/js/jquery-slimscroll/jquery.slimscroll.js"></script>
 <!-- modernizr js -->
-<script type="text/javascript" src="assets/js/modernizr/modernizr.js"></script>
+<script type="text/javascript" src="../assets/js/modernizr/modernizr.js"></script>
 <!-- am chart -->
-<script src="assets/pages/widget/amchart/amcharts.min.js"></script>
-<script src="assets/pages/widget/amchart/serial.min.js"></script>
+<script src="../assets/pages/widget/amchart/amcharts.min.js"></script>
+<script src="../assets/pages/widget/amchart/serial.min.js"></script>
 <!-- Todo js -->
-<script type="text/javascript " src="assets/pages/todo/todo.js "></script>
+<script type="text/javascript " src="../assets/pages/todo/todo.js "></script>
 <!-- Custom js -->
-<script type="text/javascript" src="assets/pages/dashboard/custom-dashboard.js"></script>
-<script type="text/javascript" src="assets/js/script.js"></script>
-<script type="text/javascript " src="assets/js/SmoothScroll.js"></script>
-<script src="assets/js/pcoded.min.js"></script>
-<script src="assets/js/demo-12.js"></script>
-<script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="../assets/pages/dashboard/custom-dashboard.js"></script>
+<script type="text/javascript" src="../assets/js/script.js"></script>
+<script type="text/javascript " src="../assets/js/SmoothScroll.js"></script>
+<script src="../assets/js/pcoded.min.js"></script>
+<script src="../assets/js/demo-12.js"></script>
+<script src="../assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script>
 var $window = $(window);
 var nav = $('.fixed-button');

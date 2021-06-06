@@ -11,7 +11,7 @@ $session = new Session;
 $functions = new Functions;
 
 if(!empty($_SESSION["user_token"])) {
-  $functions->redirect_to("admin_dash.php");
+  $functions->redirect_to("stud_dash.php");
 } else {
   $pdo = new Connection;
   $user = new Users($pdo);
