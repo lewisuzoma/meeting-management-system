@@ -11,7 +11,7 @@ $functions = new Functions;
 $pdo = new Connection;
 
 if(empty($_SESSION["user_token"])) {
-  $functions->redirect_to("../secretary.php");
+  $functions->redirect_to("../staff.php");
 } else {
 
   if(isset($_REQUEST['token'])){
@@ -20,7 +20,7 @@ if(empty($_SESSION["user_token"])) {
     $loggedout = $session->logout($token, $queryStrToken);
 
     if ($loggedout) {
-      $functions->redirect_to("../secretary.php");
+      $functions->redirect_to("../staff.php");
     }
   }
 
@@ -158,7 +158,7 @@ if(empty($_SESSION["user_token"])) {
       </nav>
       <div class="pcoded-main-container">
          <div class="pcoded-wrapper">
-            <?php include "sec_nav.php"; ?>
+            <?php include "nav.php"; ?>
 <div class="pcoded-content">
 <div class="pcoded-inner-content">
 <div class="main-body">

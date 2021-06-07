@@ -13,7 +13,7 @@ $meeting = new Meeting($pdo);
 $task = new Tasks($pdo);
 
 if(empty($_SESSION["user_token"])) {
-  $functions->redirect_to("../secretary.php");
+  $functions->redirect_to("../staff.php");
 } else {
 
 	$action = (isset($_POST['action'])) ? $_POST['action'] : $_POST['action'];
@@ -34,7 +34,7 @@ if(empty($_SESSION["user_token"])) {
 			$response = $meeting->meetingRequest($_POST);
 			if ($response):
 				$session->message("New meeting request sent", "success");
-				$functions->redirect_to("stud_meetings.php");
+				$functions->redirect_to("meetings.php");
 			endif;
 		break;
 
@@ -42,24 +42,13 @@ if(empty($_SESSION["user_token"])) {
 			$response = $task->addTask($_POST);
 			if ($response === true):
 				$session->message("New task set", "success");
-				$functions->redirect_to("staff_task.php");
+				$functions->redirect_to("task.php");
 			else:
 				$session->message("Your entry is already in the tale/list. please choose another schedule.", "error");
-				$functions->redirect_to("staff_task.php");
+				$functions->redirect_to("task.php");
 			endif;
 		break;
 
-		case 'studaddtask':
-			$response = $task->addTask($_POST);
-			if ($response === true):
-				$session->message("New task set", "success");
-				$functions->redirect_to("task.php");
-			else:
-				$session->message("Your entry is already in the tale/list. please choose another schedule.", "error");
-				$functions->redirect_to("task.php");
-			endif;
-		break;
-		
 		default:
 			# code...
 			break;

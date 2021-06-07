@@ -39,6 +39,26 @@ class Meeting
 		return $this->pdo->preparedStatement($sql, $args);
 	}
 
+	public function countUpcomingMeetings($sql, $args=NULL){
+		return $this->pdo->preparedStatement($sql, $args)->fetchColumn();
+	}
+
+	public function countCompletedMeetings($sql, $args=NULL){
+		return $this->pdo->preparedStatement($sql, $args)->fetchColumn();
+	}
+
+	public function countCancelledMeetings($sql, $args=NULL){
+		return $this->pdo->preparedStatement($sql, $args)->fetchColumn();
+	}
+
+	public function fetchmeetingRequest($sql, $args=NULL){
+		return $this->pdo->preparedStatement($sql, $args)->fetchAll();
+	}
+
+	public function countmeetingRequest($sql, $args=NULL){
+		return $this->pdo->preparedStatement($sql, $args)->fetchColumn();
+	}
+
 	public function meetingRequest($post){
 		$pdo = new Connection;
 		$mail = new PHPMailer();

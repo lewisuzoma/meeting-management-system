@@ -161,121 +161,71 @@ if(empty($_SESSION["user_token"])) {
                   <div class="page-wrapper">
                      <div class="page-body">
                         <div class="row">
+                          <style type="text/css">
+                            .income h4 {
+                                  text-align: left;
+                                  margin-top: 0px;
+                                  font-size: 30px;
+                                  margin-bottom: 0px;
+                                  padding-bottom: 0px;
+                              }
+
+
+                              .db .icon {
+                                  color: #fff;
+                                  font-size: 55px;
+                                  margin-top: 7px;
+                                  margin-bottom: 0px;
+                                  float: right;
+                              }
+
+                          </style>
                            <!-- card1 start -->
                            <!-- Statestics Start -->
-                           <div class="col-md-12 ">
-                              <div class="card">
-                                 <div class="card-header">
-                                    <h4>Meetings</h4>
-                                    <div class="card-header-left "></div>
-                                    <div class="">
-                                          <table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
-                                    <thead>
-                                      <tr>
-                                      <th>#</th>
-                                        <th> Type of Meeting</th>
-                                        <th>Date and Time of Meeting </th>
-                                        <th>Minutes of the Meeting</th>
-                                      <th>View</th>
-                                      <th>Status</th>
-                                      <th>Action</th>
-                                      
-                                      </tr>
-                                    </thead>
-                                    <tfoot>
-                                      <tr>
-                                      <th>#</th>
-                                        <th> Type of Meeting</th>
-                                        <th>Date and Time of Meeting </th>
-                                        <th>Minutes of the Meeting</th>
-                                      <th>View</th>
-                                      <th>Status</th>
-                                      <th>Action</th>
-                                      </tr>
-                                      </tr>
-                                    </tfoot>
-                                    <tbody>
+                           <div class="col-md-4 ">
+                              <div class="card income db mbm bg-info">
+                                 <div class="card-body">
 
-                                    <?php 
-                  $cnt = 1;
-                  if($results = $meeting->meetings("SELECT `meetings`.*, `meetingtype`.`name` FROM `meetings` LEFT JOIN `meetingtype` ON `meetings`.`meetingTypeId`=`meetingtype`.`id`"))
-                  {
-                  foreach($results as $result)
-                  {       
-                     ?>  
-                                      <tr>
-                                        <td><?php echo htmlentities($cnt);?></td>
-                                        <td><?php echo ucfirst($result->name);?></td>
-                                        <td><?php echo htmlentities($result->meetingDate).' '.$result->meetingTime;?></td>
-                                        <td><?php echo (empty($result->minutesOfMeeting)) ? '<a href="upload_mom.php?meetingid='.$result->id.'" class="text-info"><i class="fa fa-upload"></i> Upload MOM</a>' : '<a href="../../docs/'.$result->minutesOfMeeting.'" class="text-info"><i class="fa fa-download"></i> Download MOM</a>' ;?></td>
-                                        <td><a href="meeting_details.php?meetingid=<?php echo $result->id;?>" title="view" class="text-info"><i class="fa fa-eye"></i></a></td>
-                                        <td><?php echo ($result->isActive == 1) ? "<span class='text-success'>upcoming</span>" : "--" ;?></td>
-                                        <td>
-                                        <a href="#edit_meeting.php?meetingid=<?php echo $result->id;?>" title="edit" class="text-warning"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
-                                      <a href="index.php?deleteid=<?php echo htmlentities($result->id);?>" title="view" class="text-danger" onclick="return confirm('Are you sure to delete this meeting?')"><i class="fa fa-trash-o"></i></a>
-                                      </td>
-                                      </tr>
-                                      <?php $cnt=$cnt+1; }} ?>
-                                      
-                                    </tbody>
-                                  </table>
-                                    </div>
+                                        <p class="icon">
+                                            <i class="icon fa fa-layers"></i>
+                                        </p>
+                                        <h4 class="value">
+                                            <span><?php echo $meeting->countUpcomingMeetings("SELECT COUNT(*) FROM `meetings` WHERE `status`='upcoming'"); ?></span></h4>
+                                        <p class="description">
+                                            Upcoming</p>
+                                      <!-- /.info-box -->
                                  </div>
                               </div>
-                              <div class=" sub_sect2">
-                                 <div class="card">
-                                    <div class="card-body">
-                                       <div class="col-md-12"><?php echo $session->check_message(); ?></div>
-                                 <div class="mr">
-                                    <h4 class="">ADD MEETING</h4>
-                                    <hr>
-                                    <form method="POST" action="controller.php" novalidate="">
-                                       <input type="hidden" name="action" value="addmeeting">
-                                    <div class="mt-3">
-                                       <label for="typeOfMeeting" class="form-label ">Type of Meeting</label>
-                                       <select class="form-control" id="typeOfMeeting" name="typeOfMeeting">
-                                          <?php $meetingtype = new MeetingType($pdo);
-                                          $stmt = $meetingtype->meetingtypes("select * from meetingtype");
-                                          foreach ($stmt as $res):
-                                             echo '<option value="'.$res->id.'">'.ucwords($res->name).'</option>';
-                                           endforeach; ?>
-                                       </select>
-                                    </div>
-                                    <div class="mt-3">
-                                       <label for="subjectOfMeeting" class="form-label">Subject of Meeting</label>
-                                       <input class="form-control" type="text" placeholder="" aria-label="default input example" id="subjectOfMeeting" name="subjectOfMeeting">
-                                 </div>
-                                 <div class="mt-3 col-md-4">
-                                       <label for="date" class="form-label">Date</label>
-                                       <input class="form-control" type="date" placeholder="" name="date" id="date">
-                                 </div>
-                                 <div class="mt-3 col-md-4">
-                                       <label for="time" class="form-label">Time</label>
-                                       <input class="form-control" type="time" placeholder="" name="time" id="time">
-                                 </div>
-                                 <div class="mt-3">
-                                       <label for="venue" class="form-label">Venue of Meeting</label>
-                                       <input class="form-control" type="text" placeholder="" name="venue" id="venue">
-                                 </div>
-                                 <div class="mt-3">
-                                       <label for="greetingtxt" class="form-label">Greeting Text</label>
-                                       <input class="form-control" type="text" placeholder="" name="greetingtxt" id="greetingtxt">
-                                 </div>
-                                 <div class="mt-3">
-                                       <label for="greetingtxt" class="form-label">Agenda</label>
-                                       <textarea class="form-control" name="agenda" id="agenda" rows="5" col="3"></textarea>
-                                 </div>
-                                 <div class="mt-3">
-                                       <button type="submit" name="add_meeting" class="btn btn-primary"> save</button>
-                                 </div>
-                                 </form>
-                                 </div>
-                                 </div>
+                           </div>
+                           <div class="col-md-4 ">
+                              <div class="card income db mbm bg-success">
+                                 <div class="card-body">
+
+                                        <p class="icon">
+                                            <i class="icon fa fa-"></i>
+                                        </p>
+                                        <h4 class="value">
+                                            <span><?php echo $meeting->countCompletedMeetings("SELECT COUNT(*) FROM `meetings` WHERE `status`='completed'"); ?></span></h4>
+                                        <p class="description">
+                                            Completed</p>
+                                      <!-- /.info-box -->
                                  </div>
                               </div>
-                              <div class="sub_sect2"></div>
-                              <div class="sub_sect2"></div>
-                              <div id="styleSelector"></div>
+                           </div>
+                           <div class="col-md-4 ">
+                              <div class="card income db mbm bg-warning">
+                                 <div class="card-body">
+
+                                        <p class="icon">
+                                            <i class="icon fa fa-clip"></i>
+                                        </p>
+                                        <h4 class="value">
+                                            <span><?php echo $meeting->countCancelledMeetings("SELECT COUNT(*) FROM `meetings` WHERE `status`='cancelled'"); ?></span></h4>
+                                        <p class="description">
+                                            Cancelled</p>
+                                      <!-- /.info-box -->
+                                 </div>
+                              </div>
                            </div>
                         </div>
                      </div>

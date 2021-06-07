@@ -11,7 +11,7 @@ $session = new Session;
 $functions = new Functions;
 
 if(!empty($_SESSION["user_token"])) {
-	$functions->redirect_to("staff_dash.php");
+	$functions->redirect_to("staff/index.php");
 } else {
 	$pdo = new Connection;
 	$user = new Users($pdo);
@@ -22,7 +22,7 @@ if(!empty($_SESSION["user_token"])) {
 	$staffpassword = $_POST['staffpassword'];
 
 		if($user->AuthenticateUserstaff([$staffemail])){
-			$functions->redirect_to("staff_dash.php");
+			$functions->redirect_to("staff/index.php");
 		}else{
 			$session->message("Error: Invalid Login Details.", "error");
 		}	

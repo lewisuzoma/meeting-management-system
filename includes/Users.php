@@ -160,7 +160,7 @@ class Users
 
 	public function update($sql, $args = NULL) 
 	{
-		$this->pdo->preparedStatement($sql, $args)->lastInsertedId();
+		$this->pdo->preparedStatement($sql, $args);
 	}
 	public function delete($sql, $args = NULL) 
 	{

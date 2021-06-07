@@ -1,4 +1,4 @@
-<?php require_once("../config/initialize.php"); 
+<?php require_once("../../config/initialize.php"); 
 use app\config\Connection;
 use app\config\Functions;
 use app\config\Session;
@@ -10,7 +10,7 @@ $pdo = new Connection;
 $meeting = new Meeting($pdo);
 
 if(empty($_SESSION["user_token"])) {
-  $functions->redirect_to("staff.php");
+  $functions->redirect_to("../student.php");
 } else {
 
   if(isset($_REQUEST['token'])){
@@ -19,7 +19,7 @@ if(empty($_SESSION["user_token"])) {
     $loggedout = $session->logout($token, $queryStrToken);
 
     if ($loggedout) {
-      $functions->redirect_to("staff.php");
+      $functions->redirect_to("../student.php");
     }
   }
 
@@ -37,15 +37,15 @@ if(empty($_SESSION["user_token"])) {
       <!-- Google font-->
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
       <!-- Required Fremwork -->
-      <link rel="stylesheet" type="text/css" href="assets/css/bootstrap/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap/css/bootstrap.min.css">
       <!-- themify-icons line icon -->
-      <link rel="stylesheet" type="text/css" href="assets/icon/themify-icons/themify-icons.css">
+      <link rel="stylesheet" type="text/css" href="../assets/icon/themify-icons/themify-icons.css">
       <!-- ico font -->
-      <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
+      <link rel="stylesheet" type="text/css" href="../assets/icon/icofont/css/icofont.css">
       <!-- Style.css -->
       <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-      <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-      <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+      <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+      <link rel="stylesheet" type="text/css" href="../assets/css/jquery.mCustomScrollbar.css">
    </head>
    <body>
       <div id="pcoded" class="pcoded">
@@ -86,7 +86,7 @@ if(empty($_SESSION["user_token"])) {
                         </li>
                         <li>
                            <div class="media">
-                              <img class="d-flex align-self-center img-radius" src="../images/avatar.jpg" alt="Generic placeholder image">
+                              <img class="d-flex align-self-center img-radius" src="../../images/avatar.jpg" alt="Generic placeholder image">
                               <div class="media-body">
                                  <h5 class="notification-user"></h5>
                                  <p class="notification-msg"></p>
@@ -96,7 +96,7 @@ if(empty($_SESSION["user_token"])) {
                         </li>
                         <li>
                            <div class="media">
-                              <img class="d-flex align-self-center img-radius" src="../images/avatar.jpg" alt="Generic placeholder image">
+                              <img class="d-flex align-self-center img-radius" src="../../images/avatar.jpg" alt="Generic placeholder image">
                               <div class="media-body">
                                  <h5 class="notification-user">Joseph William</h5>
                                  <p class="notification-msg"></p>
@@ -106,7 +106,7 @@ if(empty($_SESSION["user_token"])) {
                         </li>
                         <li>
                            <div class="media">
-                              <img class="d-flex align-self-center img-radius" src="assets/images/avatar-4.jpg" alt="Generic placeholder image">
+                              <img class="d-flex align-self-center img-radius" src="../assets/images/avatar-4.jpg" alt="Generic placeholder image">
                               <div class="media-body">
                                  <h5 class="notification-user">Sara Soudein</h5>
                                  <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
@@ -118,18 +118,18 @@ if(empty($_SESSION["user_token"])) {
                   </li>
                   <li class="user-profile header-notification">
                      <a href="#!">
-                     <img src="../images/avatar.jpg" class="img-radius" alt="User-Profile-Image">
+                     <img src="../../images/avatar.jpg" class="img-radius" alt="User-Profile-Image">
                      <span></span>
                      <i class="ti-angle-down"></i>
                      </a>
                      <ul class="show-notification profile-notification">
                         <li>
-                           <a href="staff_setting.php">
+                           <a href="setting.php">
                            <i class="ti-settings"></i> Settings
                            </a>
                         </li>
                         <li>
-                           <a href="staff_profile">
+                           <a href="profile">
                            <i class="ti-user"></i> Profile
                            </a>
                         </li>
@@ -146,76 +146,7 @@ if(empty($_SESSION["user_token"])) {
       </nav>
       <div class="pcoded-main-container">
       <div class="pcoded-wrapper">
-         <nav class="pcoded-navbar">
-            <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
-            <div class="pcoded-inner-navbar main-menu">
-               <div class="">
-                  <div class="main-menu-header">
-                     <img class="img-40 img-radius" src="../images/avatar.jpg" alt="User-Profile-Image">
-                     <div class="user-details">
-                        <span></span>
-                        <span id="more-details"><i class="ti-angle-down"></i></span>
-                     </div>
-                  </div>
-                  <div class="main-menu-content">
-                     <ul>
-                        <li class="more-details">
-                           <a href="staff_profile"><i class="ti-user"></i>View Profile</a>
-                           <a href="staff_setting.php"><i class="ti-settings"></i>Settings</a>
-                           <a href="?token=<?php echo $_SESSION['user_token']; ?>">
-                                            <i class="ti-layout-sidebar-left"></i> Logout
-                                        </a>
-                        </li>
-                     </ul>
-                  </div>
-               </div>
-               <div class="pcoded-search">
-                  <span class="searchbar-toggle">  </span>
-                  <div class="pcoded-search-box ">
-                     <input type="text" placeholder="Search">
-                     <span class="search-icon"><i class="ti-search" aria-hidden="true"></i></span>
-                  </div>
-               </div>
-               <ul class="pcoded-item pcoded-left-item">
-               <li class="">
-                  <a href="staff_dashboard.php">
-                  <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                  <span class="pcoded-mtext" data-i18n="nav.dash.main">Home</span>
-                  <span class="pcoded-mcaret"></span>
-                  </a>
-               </li>
-               <li class="">
-                  <a href="staff_task.php">
-                  <span class="pcoded-micon"><i class="ti-layout"></i></span>
-                  <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Task</span>
-                  <span class="pcoded-mcaret"></span>
-                  </a>
-                 </li>
-               <li class="active">
-                  <a href="staff_meetings.php">
-                  <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                  <span class="pcoded-mtext" data-i18n="nav.form-components.main">Meetings</span>
-                  <span class="pcoded-mcaret"></span>
-                  </a>
-               </li>
-               <li>
-                  <a href="staff_schedules.php">
-                  <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                  <span class="pcoded-mtext" data-i18n="nav.form-components.main">Schedules</span>
-                  <span class="pcoded-mcaret"></span>
-                  </a>
-               </li>
-               <li class="">
-                    <a href="staff_requests.php">
-                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Requests</span>
-                    <span class="pcoded-mcaret"></span>
-                    </a>
-                 </li>
-           	</ul>
-              
-            </div>
-         </nav>
+         <?php include "nav.php"; ?>
          <div class="pcoded-content">
             <div class="pcoded-inner-content">
                <div class="main-body">
@@ -257,7 +188,7 @@ if(empty($_SESSION["user_token"])) {
 
 						                  <?php 
 						$cnt = 1;
-						if($results = $meeting->meetings("SELECT `meetings`.*, `meetingtype`.`name` FROM `meetings` LEFT JOIN `meetingtype` ON `meetings`.`meetingTypeId`=`meetingtype`.`id` WHERE `meetings`.`attendee`=? OR `meetings`.`attendee`=?", ['staff', 'allusers']))
+						if($results = $meeting->meetings("SELECT `meetings`.*, `meetingtype`.`name` FROM `meetings` LEFT JOIN `meetingtype` ON `meetings`.`meetingTypeId`=`meetingtype`.`id` WHERE `meetings`.`meetingTypeId`=?", ['4']))
 						{
 						foreach($results as $result)
 						{       
@@ -266,9 +197,9 @@ if(empty($_SESSION["user_token"])) {
 						                      <td><?php echo htmlentities($cnt);?></td>
 						                      <td><?php echo ucfirst($result->name);?></td>
 						                      <td><?php echo htmlentities($result->meetingDate).' '.$result->meetingTime;?></td>
-						                      <td><?php echo (empty($result->minutesOfMeeting)) ? '' : '<a href="../docs/'.$result->minutesOfMeeting.'" class="text-info"><i class="fa fa-download"></i> Download MOM</a>' ;?></td>
-						                      <td><a href="staff_meeting_details.php?meetingid=<?php echo $result->id;?>" title="view" class="text-info"><i class="fa fa-eye"></i></a></td>
-						                      <td><?php echo ($result->isActive == 1) ? "<span class='text-success'>upcoming</span>" : "--" ;?></td>
+						                      <td><?php echo (empty($result->minutesOfMeeting)) ? '' : '<a href="../../docs/'.$result->minutesOfMeeting.'" class="text-info"><i class="fa fa-download"></i> Download MOM</a>' ;?></td>
+						                      <td><a href="meeting_details.php?meetingid=<?php echo $result->id;?>" title="view" class="text-info"><i class="fa fa-eye"></i></a></td>
+						                       <td><?php echo ($result->status) ? "<span class='text-info'>".$result->status."</span>" : "--" ;?></td>
 						                    </tr>
 						                    <?php $cnt=$cnt+1; }} ?>
 						                    
@@ -276,6 +207,91 @@ if(empty($_SESSION["user_token"])) {
 						                </table>
                                     </div>
                                  </div>
+                              </div>
+
+                              <div class="col-md-12 ">
+                              <div class="card">
+                                 <div class="card-header">
+                                    <h4>Meeting Request</h4>
+                                    <div class="card-header-left "></div>
+                                    <div class="">
+                                          <table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                                    <thead>
+                                      <tr>
+                                      <th>#</th>
+                                        <th> Meeting Purpose</th>
+                                        <th> Staff Email</th>
+                                        <th>Date and Time of Meeting </th>
+                                      <th>Status</th>
+                                      
+                                      </tr>
+                                    </thead>
+                                    <tfoot>
+                                      <tr>
+                                      <th>#</th>
+                                        <th> Meeting Purpose</th>
+                                        <th> Staff Email</th>
+                                        <th>Date and Time of Meeting </th>
+                                      <th>Status</th>
+                                      </tr>
+                                      </tr>
+                                    </tfoot>
+                                    <tbody>
+
+                                    <?php 
+                  $cnt = 1;
+                  if($results = $meeting->fetchmeetingRequest("SELECT * FROM `meetingrequest` WHERE `userId`=?", [$_SESSION['userId']]))
+                  {
+                  foreach($results as $result)
+                  {       
+                     ?>  
+                                      <tr>
+                                        <td><?php echo htmlentities($cnt);?></td>
+                                        <td><?php echo ucfirst($result->purpose);?></td>
+                                        <td><?php echo $result->staffemail;?></td>
+                                        <td><?php echo htmlentities($result->meetingDate).' '.$result->meetingTime;?></td>s
+                                         <td><?php echo ($result->status) ? "<span class='text-info'>".$result->status."</span>" : "--" ;?></td>
+                                      </tr>
+                                      <?php $cnt=$cnt+1; }} ?>
+                                      
+                                    </tbody>
+                                  </table>
+                                    </div>
+                                 </div>
+                              </div>
+
+                              <div class=" sub_sect2">
+                              	<div class="card">
+                              		<div class="card-body">
+                              			<div class="col-md-12"><?php echo $session->check_message(); ?></div>
+                                 <div class="mr">
+                                    <h4>SEND MEETING REQUEST</h4>
+                                    <hr>
+                                    <form method="POST"action="controller.php" novalidate="">
+                                    	<input type="hidden" name="action" value="meetingrequest">
+                                    	<div class="">
+										<label for="email" class="form-label ">Email address</label>
+										<input type="email" class="form-control" id="email" name="email" placeholder="staffname@example.com">
+										</div>
+										<div class="">
+										<label for="purposeOfmeeting" class="form-label">Purpose of Meeting</label>
+										<input class="form-control" type="text" placeholder="" aria-label="default input example" id="purposeOfmeeting" name="purposeOfmeeting">
+										</div>
+										<div class="col-md-4">
+										<label for="meetingDate" class="form-label">Date</label>
+										<input class="form-control" type="date" placeholder="" aria-label="default input example" id="meetingDate" name="meetingDate">
+										</div>
+										<div class="col-md-4">
+										<label for="meetingTime" class="form-label">Time</label>
+										<input class="form-control" type="time" placeholder="" aria-label="default input example" id="meetingTime" name="meetingTime">
+										</div>
+										<div class="mt-3 col-md-4">
+										<button class="form-control btn-primary">SEND</button>
+										</div>
+                                    </form>
+                                 </div>
+                                 </div>
+                              	</div>
                               </div>
                               <div class="sub_sect2"></div>
                               <div class="sub_sect2"></div>
@@ -289,26 +305,26 @@ if(empty($_SESSION["user_token"])) {
          </div>
       </div>
       <!-- Required Jquery -->
-      <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
-      <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js"></script>
-      <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
-      <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="../assets/js/jquery/jquery.min.js"></script>
+      <script type="text/javascript" src="../assets/js/jquery-ui/jquery-ui.min.js"></script>
+      <script type="text/javascript" src="../assets/js/popper.js/popper.min.js"></script>
+      <script type="text/javascript" src="../assets/js/bootstrap/js/bootstrap.min.js"></script>
       <!-- jquery slimscroll js -->
-      <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js"></script>
+      <script type="text/javascript" src="../assets/js/jquery-slimscroll/jquery.slimscroll.js"></script>
       <!-- modernizr js -->
-      <script type="text/javascript" src="assets/js/modernizr/modernizr.js"></script>
+      <script type="text/javascript" src="../assets/js/modernizr/modernizr.js"></script>
       <!-- am chart -->
-      <script src="assets/pages/widget/amchart/amcharts.min.js"></script>
-      <script src="assets/pages/widget/amchart/serial.min.js"></script>
+      <script src="../assets/pages/widget/amchart/amcharts.min.js"></script>
+      <script src="../assets/pages/widget/amchart/serial.min.js"></script>
       <!-- Todo js -->
-      <script type="text/javascript " src="assets/pages/todo/todo.js "></script>
+      <script type="text/javascript " src="../assets/pages/todo/todo.js "></script>
       <!-- Custom js -->
-      <script type="text/javascript" src="assets/pages/dashboard/custom-dashboard.js"></script>
-      <script type="text/javascript" src="assets/js/script.js"></script>
-      <script type="text/javascript " src="assets/js/SmoothScroll.js"></script>
-      <script src="assets/js/pcoded.min.js"></script>
-      <script src="assets/js/demo-12.js"></script>
-      <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script type="text/javascript" src="../assets/pages/dashboard/custom-dashboard.js"></script>
+      <script type="text/javascript" src="../assets/js/script.js"></script>
+      <script type="text/javascript " src="../assets/js/SmoothScroll.js"></script>
+      <script src="../assets/js/pcoded.min.js"></script>
+      <script src="../assets/js/demo-12.js"></script>
+      <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script>
          var $window = $(window);
          var nav = $('.fixed-button');

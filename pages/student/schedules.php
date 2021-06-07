@@ -1,4 +1,4 @@
-<?php require_once("../config/initialize.php"); 
+<?php require_once("../../config/initialize.php"); 
 use app\config\Connection;
 use app\config\Functions;
 //use app\includes\Schedules;
@@ -10,7 +10,7 @@ $pdo = new Connection;
 //$schedules = new Schedules($pdo);
 
 if(empty($_SESSION["user_token"])) {
-  $functions->redirect_to("student.php");
+  $functions->redirect_to("../student.php");
 } else {
 
   if(isset($_REQUEST['token'])){
@@ -19,7 +19,7 @@ if(empty($_SESSION["user_token"])) {
     $loggedout = $session->logout($token, $queryStrToken);
 
     if ($loggedout) {
-      $functions->redirect_to("student.php");
+      $functions->redirect_to("../student.php");
     }
   }
 
@@ -37,19 +37,19 @@ if(empty($_SESSION["user_token"])) {
       <!-- Google font-->
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
       <!-- Required Fremwork -->
-      <link rel="stylesheet" type="text/css" href="assets/css/bootstrap/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap/css/bootstrap.min.css">
       <!-- themify-icons line icon -->
-      <link rel="stylesheet" type="text/css" href="assets/icon/themify-icons/themify-icons.css">
+      <link rel="stylesheet" type="text/css" href="../assets/icon/themify-icons/themify-icons.css">
       <!-- ico font -->
-      <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
+      <link rel="stylesheet" type="text/css" href="../assets/icon/icofont/css/icofont.css">
       <!-- Style.css -->
-      <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+      <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
       <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
       <!-- Required Jquery -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-      <link rel="stylesheet" href="assets/css/calendar.css">
+      <link rel="stylesheet" href="../assets/css/calendar.css">
    </head>
    <body>
       <div id="pcoded" class="pcoded">
@@ -100,7 +100,7 @@ if(empty($_SESSION["user_token"])) {
                         </li>
                         <li>
                            <div class="media">
-                              <img class="d-flex align-self-center img-radius" src="../images/avatar.jpg" alt="Generic placeholder image">
+                              <img class="d-flex align-self-center img-radius" src="../../images/avatar.jpg" alt="Generic placeholder image">
                               <div class="media-body">
                                  <h5 class="notification-user">Joseph William</h5>
                                  <p class="notification-msg"></p>
@@ -110,7 +110,7 @@ if(empty($_SESSION["user_token"])) {
                         </li>
                         <li>
                            <div class="media">
-                              <img class="d-flex align-self-center img-radius" src="assets/images/avatar-4.jpg" alt="Generic placeholder image">
+                              <img class="d-flex align-self-center img-radius" src="../assets/images/avatar-4.jpg" alt="Generic placeholder image">
                               <div class="media-body">
                                  <h5 class="notification-user">Sara Soudein</h5>
                                  <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
@@ -122,18 +122,18 @@ if(empty($_SESSION["user_token"])) {
                   </li>
                   <li class="user-profile header-notification">
                      <a href="#!">
-                     <img src="../images/avatar.jpg" class="img-radius" alt="User-Profile-Image">
+                     <img src="../../images/avatar.jpg" class="img-radius" alt="User-Profile-Image">
                      <span></span>
                      <i class="ti-angle-down"></i>
                      </a>
                      <ul class="show-notification profile-notification">
                         <li>
-                           <a href="stud_setting.php">
+                           <a href="setting.php">
                            <i class="ti-settings"></i> Settings
                            </a>
                         </li>
                         <li>
-                           <a href="stud_profile.php">
+                           <a href="profile.php">
                            <i class="ti-user"></i> Profile
                            </a>
                         </li>
@@ -150,66 +150,7 @@ if(empty($_SESSION["user_token"])) {
       </nav>
       <div class="pcoded-main-container">
          <div class="pcoded-wrapper">
-            <nav class="pcoded-navbar">
-               <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
-               <div class="pcoded-inner-navbar main-menu">
-                  <div class="">
-                     <div class="main-menu-header">
-                        <img class="img-40 img-radius" src="../images/avatar.jpg" alt="User-Profile-Image">
-                        <div class="user-details">
-                           <span></span>
-                           <span id="more-details"><i class="ti-angle-down"></i></span>
-                        </div>
-                     </div>
-                     <div class="main-menu-content">
-                        <ul>
-                           <li class="more-details">
-                              <a href="stud_profile.php"><i class="ti-user"></i>View Profile</a>
-                              <a href="stud_setting.php"><i class="ti-settings"></i>Settings</a>
-                              <a href="?token=<?php echo $_SESSION['user_token']; ?>"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                           </li>
-                        </ul>
-                     </div>
-                  </div>
-                  <div class="pcoded-search">
-                     <span class="searchbar-toggle">  </span>
-                     <div class="pcoded-search-box ">
-                        <input type="text" placeholder="Search">
-                        <span class="search-icon"><i class="ti-search" aria-hidden="true"></i></span>
-                     </div>
-                  </div>
-                  <ul class="pcoded-item pcoded-left-item">
-                  <li class="">
-                     <a href="stud_dashboard.php">
-                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Home</span>
-                     <span class="pcoded-mcaret"></span>
-                     </a>
-                  </li>
-                  <li class="">
-                     <a href="stud_task.php">
-                     <span class="pcoded-micon"><i class="ti-layout"></i></span>
-                     <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Task</span>
-                     <span class="pcoded-mcaret"></span>
-                     </a>
-                    </li>
-                  <li>
-                     <a href="stud_meetings.php">
-                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">Meetings</span>
-                     <span class="pcoded-mcaret"></span>
-                     </a>
-                  </li>
-                  <li class="active">
-                     <a href="stud_schedules.php">
-                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">Schedules</span>
-                     <span class="pcoded-mcaret"></span>
-                     </a>
-                  </li>
-                 </ul>
-               </div>
-            </nav>
+            <?php include "nav.php"; ?>
             <div class="pcoded-content">
                <div class="pcoded-inner-content">
                   <div class="main-body">
@@ -267,25 +208,25 @@ if(empty($_SESSION["user_token"])) {
       </div>
       <!-- Scheduling calendar -->
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-      <script type="text/javascript" src="assets/js/calendar.js"></script>
-      <script type="text/javascript" src="assets/js/events.js"></script>
+      <script type="text/javascript" src="../assets/js/calendar.js"></script>
+      <script type="text/javascript" src="../assets/js/events.js"></script>
 
       <!-- jquery slimscroll js -->
-      <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js"></script>
+      <script type="text/javascript" src="../assets/js/jquery-slimscroll/jquery.slimscroll.js"></script>
       <!-- modernizr js -->
-      <script type="text/javascript" src="assets/js/modernizr/modernizr.js"></script>
+      <script type="text/javascript" src="../assets/js/modernizr/modernizr.js"></script>
       <!-- am chart -->
-      <script src="assets/pages/widget/amchart/amcharts.min.js"></script>
-      <script src="assets/pages/widget/amchart/serial.min.js"></script>
+      <script src="../assets/pages/widget/amchart/amcharts.min.js"></script>
+      <script src="../assets/pages/widget/amchart/serial.min.js"></script>
       <!-- Todo js -->
-      <script type="text/javascript " src="assets/pages/todo/todo.js "></script>
+      <script type="text/javascript " src="../assets/pages/todo/todo.js "></script>
       <!-- Custom js -->
-      <script type="text/javascript" src="assets/pages/dashboard/custom-dashboard.js"></script>
-      <script type="text/javascript" src="assets/js/script.js"></script>
-      <script type="text/javascript " src="assets/js/SmoothScroll.js"></script>
-      <script src="assets/js/pcoded.min.js"></script>
-      <script src="assets/js/demo-12.js"></script>
-      <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script type="text/javascript" src="../assets/pages/dashboard/custom-dashboard.js"></script>
+      <script type="text/javascript" src="../assets/js/script.js"></script>
+      <script type="text/javascript " src="../assets/js/SmoothScroll.js"></script>
+      <script src="../assets/js/pcoded.min.js"></script>
+      <script src="../assets/js/demo-12.js"></script>
+      <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script>
          var $window = $(window);
          var nav = $('.fixed-button');

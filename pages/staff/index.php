@@ -12,7 +12,7 @@ $meeting = new Meeting($pdo);
 $task = new Tasks($pdo);
 
 if(empty($_SESSION["user_token"])) {
-	$functions->redirect_to("../student.php");
+	$functions->redirect_to("../staff.php");
 } else {
 
 	if(isset($_REQUEST['token'])){
@@ -21,7 +21,7 @@ if(empty($_SESSION["user_token"])) {
 		$loggedout = $session->logout($token, $queryStrToken);
 
 		if ($loggedout) {
-			$functions->redirect_to("../student.php");
+			$functions->redirect_to("../staff.php");
 		}
 	}
 
@@ -87,7 +87,7 @@ if(empty($_SESSION["user_token"])) {
                         </li>
                         <li>
                            <div class="media">
-                              <img class="d-flex align-self-center img-radius" src="../../images/avatar.jpg" alt="Generic placeholder image">
+                              <img class="d-flex align-self-center img-radius" src="./../images/avatar.jpg" alt="Generic placeholder image">
                               <div class="media-body">
                                  <h5 class="notification-user"></h5>
                                  <p class="notification-msg"></p>
@@ -154,7 +154,7 @@ if(empty($_SESSION["user_token"])) {
                      <div class="page-wrapper">
                         <div class="page-body">
                            <div class="row">
-                              <style type="text/css">
+                           	<style type="text/css">
                                .income h4 {
                                      text-align: left;
                                      margin-top: 0px;
@@ -183,7 +183,7 @@ if(empty($_SESSION["user_token"])) {
                                             <i class="icon fa fa-layers"></i>
                                         </p>
                                         <h4 class="value">
-                                            <span><?php echo $task->countTasks("SELECT COUNT(*) FROM `listtask` WHERE `userId`='{$_SESSION['userId']}'"); ?></span></h4>
+                                            <span><?php echo $task->countTasks("SELECT COUNT(*) FROM `listtask` WHERE `createdBy`='{$_SESSION['userId']}'"); ?></span></h4>
                                         <p class="description">
                                             Tasks</p>
                                       <!-- /.info-box -->
@@ -199,7 +199,7 @@ if(empty($_SESSION["user_token"])) {
                                             <i class="icon fa fa-layers"></i>
                                         </p>
                                         <h4 class="value">
-                                            <span><?php echo $task->countCompletedTasks("SELECT COUNT(*) FROM `listtask` WHERE `userId`='{$_SESSION['userId']}' AND `status`='completed'"); ?></span></h4>
+                                            <span><?php echo $task->countCompletedTasks("SELECT COUNT(*) FROM `listtask` WHERE `createdBy`='{$_SESSION['userId']}' AND `status`='completed'"); ?></span></h4>
                                         <p class="description">
                                             Completed Task</p>
                                       <!-- /.info-box -->
@@ -215,7 +215,7 @@ if(empty($_SESSION["user_token"])) {
                                             <i class="icon fa fa-layers"></i>
                                         </p>
                                         <h4 class="value">
-                                            <span><?php echo $meeting->countUpcomingMeetings("SELECT COUNT(*) FROM `meetings` WHERE `status`='upcoming' AND `meetingTypeId`='4'"); ?></span></h4>
+                                            <span><?php echo $meeting->countUpcomingMeetings("SELECT COUNT(*) FROM `meetings` WHERE `status`='upcoming' AND `meetingTypeId`='1' OR `meetingTypeId`='2' OR `meetingTypeId`='3' OR `meetingTypeId`='4'"); ?></span></h4>
                                         <p class="description">
                                             Upcoming Meetings</p>
                                       <!-- /.info-box -->
@@ -231,14 +231,29 @@ if(empty($_SESSION["user_token"])) {
                                             <i class="icon fa fa-layers"></i>
                                         </p>
                                         <h4 class="value">
-                                            <span><?php echo $meeting->countUpcomingMeetings("SELECT COUNT(*) FROM `meetings` WHERE `meetingTypeId`='4'"); ?></span></h4>
+                                            <span><?php echo $meeting->countUpcomingMeetings("SELECT COUNT(*) FROM `meetings` WHERE `meetingTypeId`='1' OR `meetingTypeId`='2' OR `meetingTypeId`='3' OR `meetingTypeId`='4'"); ?></span></h4>
                                         <p class="description">
                                             Meetings</p>
                                       <!-- /.info-box -->
                                  </div>
                               </div>
                            </div>
-                              
+
+                           <div class="col-md-4 ">
+                              <div class="card income db mbm bg-success">
+                                 <div class="card-body">
+
+                                        <p class="icon">
+                                            <i class="icon fa fa-layers"></i>
+                                        </p>
+                                        <h4 class="value">
+                                            <span><?php echo $meeting->countmeetingRequest("SELECT COUNT(*) FROM `meetingrequest` WHERE `staffemail`='{$_SESSION['userEmail']}'"); ?></span></h4>
+                                        <p class="description">
+                                            Meetings Request</p>
+                                      <!-- /.info-box -->
+                                 </div>
+                              </div>
+                           </div>
                            </div>
                            <div id="styleSelector">
                            </div>
@@ -249,7 +264,7 @@ if(empty($_SESSION["user_token"])) {
             </div>
          </div>
       </div>
-   
+      -->
       <!-- Required Jquery -->
       <script type="text/javascript" src="../assets/js/jquery/jquery.min.js"></script>
       <script type="text/javascript" src="../assets/js/jquery-ui/jquery-ui.min.js"></script>
