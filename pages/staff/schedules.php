@@ -47,18 +47,33 @@ if(empty($_SESSION["user_token"])) {
 <!-- Style.css -->
 <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/jquery.mCustomScrollbar.css">
+
+<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.css" />
+
+<!-- If you use the default popups, use this. -->
+
+
+<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css" />
+
+<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.css" />
+
 <!-- Required Jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.19/jquery.touchSwipe.min.js" integrity="sha512-YYiD5ZhmJ0GCdJvx6Xe6HzHqHvMpJEPomXwPbsgcpMFPW+mQEeVBU6l9n+2Y+naq+CLbujk91vHyN18q6/RSYw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.0/js/bootstrap-timepicker.min.js"></script>
+
 
 <link rel="stylesheet" href="../assets/css/calendar.css">
 </head>
 
 <body>
+  <script src="https://uicdn.toast.com/tui.code-snippet/v1.5.2/tui-code-snippet.min.js"></script>
+
+  <script src="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.min.js"></script>
+
+  <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.min.js"></script>
+
+  <script src="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.js"></script>
 <div id="pcoded" class="pcoded">
 <div class="pcoded-overlay-box"></div>
 <div class="pcoded-container navbar-wrapper">
@@ -169,40 +184,26 @@ if(empty($_SESSION["user_token"])) {
 <!-- card1 start -->
 <!-- Statestics Start -->
 <div class="col-md-12 ">
-  <div id="calendar"></div>
 
 <div class="card">
 <div class="card-header">
 <h4>Schedule</h4>
-<div class="card-body">
-<div class="container"> 
-  <div class="page-header">
-    <div class="pull-right form-inline">
-      <div class="btn-group">
-        <button class="btn btn-primary" data-calendar-nav="prev"><< Prev</button>
-        <button class="btn btn-default" data-calendar-nav="today">Today</button>
-        <button class="btn btn-primary" data-calendar-nav="next">Next >></button>
-      </div>
-      <div class="btn-group">
-        <button class="btn btn-warning" data-calendar-view="year">Year</button>
-        <button class="btn btn-warning active" data-calendar-view="month">Month</button>
-        <button class="btn btn-warning" data-calendar-view="week">Week</button>
-        <button class="btn btn-warning" data-calendar-view="day">Day</button>
-      </div>
-    </div>
-    <h3></h3>
-    <!-- <small>To see example with events navigate to Februray 2018</small> -->
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div id="showEventCalendar"></div>
-    </div>
-    <div class="col-md-3">
-      <!-- <h4>All Events List</h4> -->
-      <ul id="eventlist" class="nav nav-list" style="display: none;"></ul>
-    </div>
-  </div>  
+<div class="float-right"><span class="help-text text-danger">view can be month, week, day</span><input type="text" id="defaultView"> <button type="submit" id="change" onclick="return calender();">Change</button></div>
 </div>
+<div class="card-body">
+  <div id="menu">
+      <span id="menu-navi">
+        <button type="button" class="btn btn-default btn-sm move-today" data-action="move-today">Today</button>
+        <button type="button" class="btn btn-default btn-sm move-day" data-action="move-prev">
+          <i class="calendar-icon ic-arrow-line-left" data-action="move-prev"></i>
+        </button>
+        <button type="button" class="btn btn-default btn-sm move-day" data-action="move-next">
+          <i class="calendar-icon ic-arrow-line-right" data-action="move-next"></i>
+        </button>
+      </span>
+      <span id="renderRange" class="render-range"></span>
+    </div>
+  <div id="calendar" style="height: 800px;"></div>
 </div>
 </div>
 
@@ -213,11 +214,112 @@ if(empty($_SESSION["user_token"])) {
 </div>
 </div>
 </div>
-<!-- Scheduling calendar -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-<!-- <script type="text/javascript" src="../assets/js/calendar.js"></script>
-<script type="text/javascript" src="../assets/js/events.js"></script> -->
-<!-- jquery slimscroll js -->
+<script type="text/javascript">
+  //document.getElementById("change").addEventListener("click", calender);
+  function calender() {
+  var changeDefaultView = document.getElementById("defaultView").value;
+
+  var Calendar = tui.Calendar;
+
+  var calendar = new Calendar('#calendar', {
+  defaultView: changeDefaultView,
+  taskView: true,
+  scheduleView: ['time'],  // e.g. true, false, or ['allday', 'time'])
+  template: {
+    monthDayname: function(dayname) {
+      return '<span class="calendar-week-dayname-name">' + dayname.label + '</span>';
+    },
+    milestone: function(schedule) {
+      return '<span style="color:red;"><i class="fa fa-flag"></i> ' + schedule.title + '</span>';
+    },
+    milestoneTitle: function() {
+      return 'Milestone';
+    },
+    task: function(schedule) {
+      return '&nbsp;&nbsp;#' + schedule.title;
+    },
+    taskTitle: function() {
+      return '<label><input type="checkbox" />Task</label>';
+    },
+    allday: function(schedule) {
+      return schedule.title + ' <i class="fa fa-refresh"></i>';
+    },
+    alldayTitle: function() {
+      return 'All Day';
+    },
+    time: function(schedule) {
+      return schedule.title + ' <i class="fa fa-refresh"></i>' + schedule.start;
+    },
+    month: {
+      daynames: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      startDayOfWeek: 0,
+      narrowWeekend: true
+    },
+    // list of Calendars that can be used to add new schedule
+    calendars: [],
+    // whether use default creation popup or not
+    useCreationPopup: false,
+    // whether use default detail popup or not
+    useDetailPopup: false
+    },
+    week: {
+      daynames: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      startDayOfWeek: 0,
+      narrowWeekend: true
+    }
+});
+
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    if (this.responseText) {
+       const res = JSON.parse(this.responseText);
+       
+          calendar.createSchedules([
+            {
+                id: res[0].id,
+                calendarId: '1',
+                title: res[0].title,
+                category: 'time',
+                dueDateClass: '',
+                start: res[0].start,
+                end: res[0].end,
+                isReadOnly: true
+            }
+          ]);
+
+    }
+  }
+  };
+  xhttp.open("POST", "../event.php", true);
+  xhttp.setRequestHeader("Content-type", "application/json");
+  xhttp.send();
+
+  /*calendar.createSchedules([
+    {
+        id: '1',
+        calendarId: '1',
+        title: 'my schedule',
+        category: 'time',
+        dueDateClass: '',
+        start: '2021-06-01',
+        end: '2021-06-08',
+        isReadOnly: true
+    },
+    {
+        id: '2',
+        calendarId: '1',
+        title: 'second schedule',
+        category: 'time',
+        dueDateClass: '',
+        start: '2021-06-09',
+        end: '2021-07-08',
+        isReadOnly: true    // schedule is read-only
+    }
+]);*/
+}
+  
+</script>
 <script type="text/javascript" src="../assets/js/jquery-slimscroll/jquery.slimscroll.js"></script>
 <!-- modernizr js -->
 <script type="text/javascript" src="../assets/js/modernizr/modernizr.js"></script>
@@ -245,127 +347,6 @@ nav.removeClass('active');
 }
 });
 
-moment.locale('en');
-var now = moment();
-
-var events = [{
-    start: now.startOf('week').add(9, 'h').format('X'),
-    end: now.startOf('week').add(10, 'h').format('X'),
-    title: '1',
-    content: 'Hello World! <br> <p>Foo Bar</p>',
-    category:'Professionnal'
-  },{
-    start: now.startOf('week').add(10, 'h').format('X'),
-    end: now.startOf('week').add(11, 'h').format('X'),
-    title: '2',
-    content: 'Hello World! <br> <p>Foo Bar</p>',
-    category:'Professionnal'
-}];
-
-var daynotes = [{
-    time: now.startOf('week').add(15, 'h').add(30, 'm').format('X'),
-    title: 'Leo\'s holiday',
-    content: 'yo',
-    category: 'holiday'
-}];
-
-var myCalendar = $('#calendar').Calendar({
-    events: events,
-    daynotes: daynotes
-}).init();
-
-
-$('#calendar').Calendar({
-
-  // language
-  locale: 'fr',
-
-  // 'day', 'week', 'month'
-  view: 'week',
-
-  // enable keyboard navigation
-  enableKeyboard: true,
-
-  // default view
-  defaultView: {
-    largeScreen: 'week',
-    smallScreen: 'day',
-    smallScreenThreshold: 1000
-  },
-
-
-  weekday: {
-    timeline: {
-      fromHour: 7, // start hour
-      toHour: 20, // end hour
-      intervalMinutes: 60,
-      format: 'HH:mm',
-      heightPx: 50,
-      autoResize: true
-    },
-    dayline: {
-      weekdays: [0, 1, 2, 3, 4, 5, 6],
-      format: 'dddd DD/MM',
-      heightPx: 31,
-      month: {
-        format: 'MMMM YYYY',
-        heightPx: 30,
-        weekFormat: 'w'
-      }
-    }
-  },
-  month: {
-    format: 'MMMM YYYY',
-    heightPx: 31,
-    weekline: {
-      format: 'w',
-      heightPx: 80
-    },
-    dayheader: {
-      weekdays: [0, 1, 2, 3, 4, 5, 6],
-      format: 'dddd',
-      heightPx: 30
-    },
-    day: {
-      format: 'DD/MM'
-    }
-  },
-
-  // timestamp in the week to display
-  unixTimestamp: moment().format('X'),
-
-  // event options
-  event: {
-    hover: {
-      delay: 500
-    }
-  },
-
-  // custom colors
-  colors: {
-    events: eventColors,
-    daynotes: daynoteColors,
-    random: true
-  },
-
-  // category options
-  categories: {
-    enable: true,
-    hover: {
-      delay: 500
-    }
-  },
-
-  // display the current time
-  now: {
-    enable: false,
-    refresh: false,
-    heightPx: 1,
-    style: 'solid',
-    color: '#03A9F4'
-  }
-  
-})
 </script>
 </body>
 
